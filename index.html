@@ -1,0 +1,27 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Library Management</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}">
+</head>
+<body>
+
+    <div class="container">
+        <h1>Library Management System</h1>
+        <p>Choose an option:</p>
+        
+        <div class="flex">
+           <!-- <img src="{{ url_for('static', filename='lib1.jpg') }}" alt="Library System" height="200px" width="20px"> -->
+
+
+            <a href="{{ url_for('index') }}"><button id="b1">Home</button></a>
+            <a href="{{ url_for('books') }}"><button id="b2">Manage Books</button></a>
+            <a href="{{ url_for('members') }}"><button id="b3">Manage Members</button></a>
+        </div>
+    </div>
+
+    <script src="{{ url_for('static', filename='script.js') }}"></script>
+</body>
+</html>

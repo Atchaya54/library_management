@@ -1,0 +1,76 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Books</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}">
+</head>
+<body>
+
+    <div class="container">
+        <h2>Manage Books</h2>
+        
+        <form method="POST">
+            <input type="text" name="title" placeholder="Book Title" required>
+            <input type="text" name="author" placeholder="Author" required>
+            <input type="number" name="stock" placeholder="Stock" required>
+            <button type="submit">Add Book</button>
+        </form>
+
+
+       
+        {% with messages = get_flashed_messages(with_categories=true) %}
+        {% if messages %}
+            {% for category, message in messages %}
+                <div class="flash {{ category }}">{{ message }}</div>
+            {% endfor %}
+        {% endif %}
+        {% endwith %}
+
+        <form action="{{ url_for('issue_book') }}" method="POST">
+            <label for="member_id">Member ID:</label>
+            <input type="text" id="member_id" name="member_id" required>
+            
+            <label for="book_id">Book ID:</label>
+            <input type="text" id="book_id" name="book_id" required>
+            
+            <button type="submit">Issue Book</button>
+        </form>
+       
+       
+       
+
+
+
+
+
+
+       <table>
+            <tr>
+                <th>Title</th>
+                <th>Author</th>
+                <th>Stock</th>
+                <th>Actions</th>
+            </tr>
+            {% for book in books %}
+            <tr>
+                <td>{{ book.title }}</td>
+                <td>{{ book.author }}</td>
+                <td>{{ book.stock }}</td>
+                <td>
+                    <form method="POST" action="{{ url_for('delete_book', book_id=book.id) }}" style="display:inline;">
+                        <button type="submit" class="delete-btn">Delete</button>
+                    </form>
+                    <!-- <a href="" class="delete-btn">Delete</a> -->
+                </td>
+            </tr>
+            {% endfor %}
+        </table>
+
+        <a href="{{ url_for('index') }}"><button>Back</button></a>
+    </div>
+
+    <script src="{{ url_for('static', filename='script.js') }}"></script>
+</body>
+</html>
